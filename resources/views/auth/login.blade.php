@@ -1,4 +1,7 @@
 <x-guest-layout>
+
+    <h1 class="text-center py-3">{{ __('Aplikasi Repositori Toponimi') }}</h1>
+
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
