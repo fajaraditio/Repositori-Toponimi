@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('alias')->nullable();
             $table->string('prev_name')->nullable();
-            $table->float('primary_latitude')->nullable();
-            $table->float('primary_longitude')->nullable();
-            $table->float('secondary_latitude')->nullable();
-            $table->float('secondary_longitude')->nullable();
+            $table->double('primary_latitude')->nullable();
+            $table->double('primary_longitude')->nullable();
+            $table->double('secondary_latitude')->nullable();
+            $table->double('secondary_longitude')->nullable();
             $table->string('meaning')->nullable();
             $table->string('language_origin')->nullable();
             $table->string('source')->nullable();

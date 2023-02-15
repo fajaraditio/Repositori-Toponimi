@@ -10,6 +10,20 @@
                     <div class="grid grid-cols-5 gap-8">
                         <div class="w-full col-span-2">
                             <div class="py-2">
+                                <x-input-label for="element_name" class="font-bold" :value="__('Element Name')" />
+                                <select wire:model="element_name"
+                                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
+                                focus:border-red-500 dark:focus:border-red-600 focus:ring-red-500
+                                dark:focus:ring-red-600 rounded-md shadow-sm w-full mt-1 text-sm {{ $errors->get('element_name') ? 'border-red-500' : '' }}">
+                                    <option value="Air Terjun">Air Terjun</option>
+                                    <option value="Alur Bawah Laut">Alur Bawah Laut</option>
+                                    <option value="Alur Sungai">Alur Sungai</option>
+                                    <option value="Jalan">Jalan</option>
+                                </select>
+                                <x-input-error :messages="$errors->get('element_name')" class="mt-2" />
+                            </div>
+
+                            <div class="py-2">
                                 <x-input-label for="name" class="font-bold" :value="__('Gazetter Name')" />
                                 <x-text-input id="name" class="block mt-1 w-full text-sm" type="text" wire:model="name"
                                     placeholder="{{ __('Example: :exampleText', ['exampleText' => 'Solo']) }}"
@@ -19,7 +33,8 @@
 
                             <div class="py-2">
                                 <x-input-label for="alias" class="font-bold" :value="__('Alias')" />
-                                <x-text-input id="alias" class="block mt-1 w-full text-sm" type="text" name="alias"
+                                <x-text-input id="alias" class="block mt-1 w-full text-sm" type="text"
+                                    wire:model="alias"
                                     placeholder="{{ __('Example: :exampleText', ['exampleText' => 'Surakarta']) }}"
                                     :error="$errors->get('alias')" />
                                 <x-input-error :messages="$errors->get('alias')" class="mt-2" />
@@ -28,7 +43,7 @@
                             <div class="py-2">
                                 <x-input-label for="prev_name" class="font-bold" :value="__('Previous Name')" />
                                 <x-text-input id="prev_name" class="block mt-1 w-full text-sm" type="text"
-                                    name="prev_name"
+                                    wire:model="prev_name"
                                     placeholder="{{ __('Example: :exampleText', ['exampleText' => 'Kartasura']) }}"
                                     :error="$errors->get('prev_name')" />
                                 <x-input-error :messages="$errors->get('prev_name')" class="mt-2" />
@@ -37,7 +52,7 @@
                             <div class="py-2">
                                 <x-input-label for="language_origin" class="font-bold" :value="__('Asal Bahasa')" />
                                 <x-text-input id="language_origin" class="block mt-1 w-full text-sm" type="text"
-                                    name="language_origin"
+                                    wire:model="language_origin"
                                     placeholder="{{ __('Example: :exampleText', ['exampleText' => 'Jawa']) }}"
                                     :error="$errors->get('language_origin')" />
                                 <x-input-error :messages="$errors->get('language_origin')" class="mt-2" />
@@ -45,7 +60,8 @@
 
                             <div class="py-2">
                                 <x-input-label for="meaning" class="font-bold" :value="__('Arti Nama')" />
-                                <x-text-input id="meaning" class="block mt-1 w-full text-sm" type="text" name="meaning"
+                                <x-text-input id="meaning" class="block mt-1 w-full text-sm" type="text"
+                                    wire:model="meaning"
                                     placeholder="{{ __('Example: :exampleText', ['exampleText' => 'Keberanian dan Kemakmuran']) }}"
                                     :error="$errors->get('meaning')" />
                                 <x-input-error :messages="$errors->get('meaning')" class="mt-2" />
@@ -53,7 +69,8 @@
 
                             <div class="py-2">
                                 <x-input-label for="source" class="font-bold" :value="__('Sumber Data')" />
-                                <x-text-input id="source" class="block mt-1 w-full text-sm" type="text" name="source"
+                                <x-text-input id="source" class="block mt-1 w-full text-sm" type="text"
+                                    wire:model="source"
                                     placeholder="{{ __('Example: :exampleText', ['exampleText' => 'Peta RBI Skala 5K Tahun 2016']) }}"
                                     :error="$errors->get('source')" required />
                                 <x-input-error :messages="$errors->get('source')" class="mt-2" />
@@ -65,7 +82,7 @@
                                     <div>
                                         <x-input-label for="primary_latitude" :value="__('Latitude')" />
                                         <x-text-input id="primary_latitude" class="block mt-1 w-full text-sm"
-                                            type="text" name="source"
+                                            type="text" wire:model="primary_latitude"
                                             placeholder="{{ __('Example: :exampleText', ['exampleText' => '-7.566667']) }}"
                                             :error="$errors->get('primary_latitude')" required />
                                         <x-input-error :messages="$errors->get('primary_latitude')" class="mt-2" />
@@ -73,7 +90,7 @@
                                     <div>
                                         <x-input-label for="primary_longitude" :value="__('Longitude')" />
                                         <x-text-input id="primary_longitude" class="block mt-1 w-full text-sm"
-                                            type="text" name="primary_longitude"
+                                            type="text" wire:model="primary_longitude"
                                             placeholder="{{ __('Example: :exampleText', ['exampleText' => '110.816667']) }}"
                                             :error="$errors->get('primary_longitude')" required />
                                         <x-input-error :messages="$errors->get('primary_longitude')" class="mt-2" />
@@ -86,18 +103,18 @@
                                 <div class="grid grid-cols-2 gap-2">
                                     <div>
                                         <x-input-label for="secondary_latitude" :value="__('Latitude')" />
-                                        <x-text-input id="primary_latitude" class="block mt-1 w-full text-sm"
-                                            type="text" name="source"
+                                        <x-text-input id="secondary_latitude" class="block mt-1 w-full text-sm"
+                                            type="text" wire:model="secondary_latitude"
                                             placeholder="{{ __('Example: :exampleText', ['exampleText' => '-7.566667']) }}"
-                                            :error="$errors->get('secondary_latitude')" required />
+                                            :error="$errors->get('secondary_latitude')" />
                                         <x-input-error :messages="$errors->get('secondary_latitude')" class="mt-2" />
                                     </div>
                                     <div>
-                                        <x-input-label for="primary_longitude" :value="__('Longitude')" />
-                                        <x-text-input id="primary_longitude" class="block mt-1 w-full text-sm"
-                                            type="text" name="primary_longitude"
+                                        <x-input-label for="secondary_longitude" :value="__('Longitude')" />
+                                        <x-text-input id="secondary_longitude" class="block mt-1 w-full text-sm"
+                                            type="text" wire:model="secondary_longitude"
                                             placeholder="{{ __('Example: :exampleText', ['exampleText' => '110.816667']) }}"
-                                            :error="$errors->get('secondary_longitude')" required />
+                                            :error="$errors->get('secondary_longitude')" />
                                         <x-input-error :messages="$errors->get('secondary_longitude')" class="mt-2" />
                                     </div>
                                 </div>
@@ -105,7 +122,7 @@
 
                             <div class="py-2">
                                 <x-input-label for="status" class="font-bold" :value="__('Status')" />
-                                <select name="status"
+                                <select wire:model="status"
                                     class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
                                     focus:border-red-500 dark:focus:border-red-600 focus:ring-red-500
                                     dark:focus:ring-red-600 rounded-md shadow-sm w-full mt-1 text-sm {{ $errors->get('status') ? 'border-red-500' : '' }}">
