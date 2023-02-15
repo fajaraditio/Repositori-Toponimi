@@ -26,18 +26,6 @@ Route::group(['prefix' => '/dashboard'], function () {
         return view('dashboard');
     })
         ->name('dashboard');
-
-    Route::group(['prefix' => 'province'], function () {
-        Route::get('/', [ProvinceController::class, 'index'])->name('province');
-    });
-
-    Route::group(['prefix' => 'city'], function () {
-        Route::get('/', [CityController::class, 'index'])->name('city');
-    });
-
-    Route::group(['prefix' => 'subdistrict'], function () {
-        Route::get('/', [SubdistrictController::class, 'index'])->name('subdistrict');
-    });
 })
     ->middleware(['auth', 'verified']);
 
