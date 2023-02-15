@@ -1100,8 +1100,13 @@
     "Zip / Postal Code": "Zip / Kode Pos",
     "Åland Islands": "Pulau Aland",
     "Create New": "Buat Baru",
+    "Element": "Unsur",
+    "Class": "Klasifikasi",
+    "Category": "Kategori",
     "Gazetter Name": "Nama Gazetter",
     "Element Name": "Unsur",
+    "Class Name": "Klasifikasi",
+    "Category Name": "Kategori Toponimi",
     "Previous Name": "Nama Sebelumnya",
     "Alias": "Nama Lain",
     "Primary Coordinate": "Koordinat Utama",
@@ -1113,5 +1118,8 @@
     "Create New Toponym": "Buat Toponimi Baru",
     "Example: :exampleText": "Mis. :exampleText",
     "Latitude": "Garis Lintang",
-    "Longitude": "Garis Bujur"
+    "Longitude": "Garis Bujur",
+    ":table \":value\" succesfully created.": ":table \":value\" berhasil dibuat",
+    ":table \":value\" succesfully updated.": ":table \":value\" berhasil diperbaharui",
+    "Please select :table": "Silakan pilih :table"
 }

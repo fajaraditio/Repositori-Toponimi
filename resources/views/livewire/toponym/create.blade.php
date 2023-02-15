@@ -7,21 +7,8 @@
 
                     <hr class="py-2">
 
-                    <div class="grid grid-cols-5 gap-8">
-                        <div class="w-full col-span-2">
-                            <div class="py-2">
-                                <x-input-label for="element_name" class="font-bold" :value="__('Element Name')" />
-                                <select wire:model="element_name"
-                                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
-                                focus:border-red-500 dark:focus:border-red-600 focus:ring-red-500
-                                dark:focus:ring-red-600 rounded-md shadow-sm w-full mt-1 text-sm {{ $errors->get('element_name') ? 'border-red-500' : '' }}">
-                                    <option value="Air Terjun">Air Terjun</option>
-                                    <option value="Alur Bawah Laut">Alur Bawah Laut</option>
-                                    <option value="Alur Sungai">Alur Sungai</option>
-                                    <option value="Jalan">Jalan</option>
-                                </select>
-                                <x-input-error :messages="$errors->get('element_name')" class="mt-2" />
-                            </div>
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="w-full">
 
                             <div class="py-2">
                                 <x-input-label for="name" class="font-bold" :value="__('Gazetter Name')" />
@@ -77,6 +64,65 @@
                             </div>
 
                             <div class="py-2">
+                                <x-input-label for="status" class="font-bold" :value="__('Status')" />
+                                <select wire:model="status"
+                                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
+                                    focus:border-red-500 dark:focus:border-red-600 focus:ring-red-500
+                                    dark:focus:ring-red-600 rounded-md shadow-sm w-full mt-1 text-sm {{ $errors->get('status') ? 'border-red-500' : '' }}">
+                                    <option value="in-review">Dalam Penelaahan</option>
+                                    <option value="valid">Sesuai</option>
+                                    <option value="invalid">Belum Sesuai</option>
+                                </select>
+                                <x-input-error :messages="$errors->get('status')" class="mt-2" />
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <div class="py-2">
+                                <x-input-label for="class_id" class="font-bold" :value="__('Class Name')" />
+                                <select wire:model="class_id"
+                                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
+                                focus:border-red-500 dark:focus:border-red-600 focus:ring-red-500
+                                dark:focus:ring-red-600 rounded-md shadow-sm w-full mt-1 text-sm {{ $errors->get('class_id') ? 'border-red-500' : '' }}">
+                                    <option value="">-- {{ __('Please select :table', ['table' => __('Class')]) }} --
+                                    </option>
+                                    @foreach ($classes as $class)
+                                    <option value="{{ $class->id }}">{{ $class->name }}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->get('class_id')" class="mt-2" />
+                            </div>
+
+                            <div class="py-2">
+                                <x-input-label for="category_id" class="font-bold" :value="__('Category Name')" />
+                                <select wire:model="category_id"
+                                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
+                                focus:border-red-500 dark:focus:border-red-600 focus:ring-red-500
+                                dark:focus:ring-red-600 rounded-md shadow-sm w-full mt-1 text-sm {{ $errors->get('category_id') ? 'border-red-500' : '' }}">
+                                    <option value="">-- {{ __('Please select :table', ['table' => __('Category')]) }} --
+                                    </option>
+                                    @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->get('category_id')" class="mt-2" />
+                            </div>
+
+                            <div class="py-2">
+                                <x-input-label for="element_id" class="font-bold" :value="__('Element Name')" />
+                                <select wire:model="element_id"
+                                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
+                                focus:border-red-500 dark:focus:border-red-600 focus:ring-red-500
+                                dark:focus:ring-red-600 rounded-md shadow-sm w-full mt-1 text-sm {{ $errors->get('element_id') ? 'border-red-500' : '' }}">
+                                    <option value="">-- {{ __('Please select :table', ['table' => __('Element')]) }} --
+                                    </option>
+                                    @foreach ($elements as $element)
+                                    <option value="{{ $element->id }}">{{ $element->name }}</option>
+                                    @endforeach
+                                </select>
+                                <x-input-error :messages="$errors->get('element_id')" class="mt-2" />
+                            </div>
+
+                            <div class="py-2">
                                 <x-input-label class="pb-2 font-bold">{{ __('Primary Coordinate') }}</x-input-label>
                                 <div class="grid grid-cols-2 gap-2">
                                     <div>
@@ -119,22 +165,8 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="py-2">
-                                <x-input-label for="status" class="font-bold" :value="__('Status')" />
-                                <select wire:model="status"
-                                    class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300
-                                    focus:border-red-500 dark:focus:border-red-600 focus:ring-red-500
-                                    dark:focus:ring-red-600 rounded-md shadow-sm w-full mt-1 text-sm {{ $errors->get('status') ? 'border-red-500' : '' }}">
-                                    <option value="in-review">Dalam Penelaahan</option>
-                                    <option value="valid">Sesuai</option>
-                                    <option value="invalid">Belum Sesuai</option>
-                                </select>
-                                <x-input-error :messages="$errors->get('status')" class="mt-2" />
-                            </div>
                         </div>
-                        <div class="w-full col-span-3">
-                        </div>
+                        <div class="w-full"></div>
                     </div>
                 </div>
                 <div class="bg-gray-50 py-3 px-6">

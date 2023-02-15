@@ -15,8 +15,13 @@ return new class extends Migration
     {
         Schema::create('toponyms', function (Blueprint $table) {
             $table->id();
-            $table->string('map_number')->nullable();
+            $table->unsignedBigInteger('element_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedBigInteger('class_id')->nullable();
             $table->string('element_name')->nullable();
+            $table->string('category_name')->nullable();
+            $table->string('class_name')->nullable();
+            $table->string('map_number')->nullable();
             $table->string('name')->nullable();
             $table->string('alias')->nullable();
             $table->string('prev_name')->nullable();

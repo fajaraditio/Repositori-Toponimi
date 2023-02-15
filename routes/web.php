@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => '/dashboard'], function () {
+Route::group(['prefix' => '/dashboard', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', function () {
         return view('dashboard');
     })
@@ -27,8 +27,7 @@ Route::group(['prefix' => '/dashboard'], function () {
     Route::group(['prefix' => 'toponym'], function () {
         Route::get('/', ToponymCreate::class)->name('toponym.create');
     });
-})
-    ->middleware(['auth', 'verified']);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile',      [ProfileController::class, 'edit'])->name('profile.edit');

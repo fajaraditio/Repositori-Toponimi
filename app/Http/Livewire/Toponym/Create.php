@@ -2,12 +2,18 @@
 
 namespace App\Http\Livewire\Toponym;
 
+use App\Models\Category;
+use App\Models\Classes;
+use App\Models\Element;
 use App\Models\Toponym;
 use Livewire\Component;
 
 class Create extends Component
 {
     public
+        $element_id,
+        $class_id,
+        $category_id,
         $name,
         $alias,
         $status,
@@ -20,10 +26,14 @@ class Create extends Component
         $secondary_latitude,
         $secondary_longitude;
 
+    public $elements, $categories, $classes;
+
     protected $rules = [
-        'name'      => 'required',
-        'status'    => 'required',
-        'source'    => 'required',
+        'element_id'    => 'required',
+        'class_id'      => 'required',
+        'name'          => 'required',
+        'status'        => 'required',
+        'source'        => 'required',
         'primary_latitude'  => 'required',
         'primary_longitude' => 'required',
     ];
@@ -33,9 +43,23 @@ class Create extends Component
         $this->validateOnly($propertyName);
     }
 
+    public function mount()
+    {
+        $this->elements     = Element::get();
+        $this->categories   = Category::get();
+        $this->classes      = Classes::get();
+    }
+
     public function save()
     {
         Toponym::create($this->validate());
+
+        session()->flash('message', __(':table ":value" succesfully created.', [
+            'table' => 'Toponym',
+            'value' => $this->name
+        ]));
+
+        return redirect()->route('dashboard');
     }
 
     public function render()
