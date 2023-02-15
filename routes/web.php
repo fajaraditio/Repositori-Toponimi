@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProvinceController;
+use App\Http\Controllers\SubdistrictController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +21,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['prefix' => '/dashboard'], function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    })
+        ->name('dashboard');
+
+    Route::group(['prefix' => 'province'], function () {
+        Route::get('/', [ProvinceController::class, 'index'])->name('province');
+    });
+
+    Route::group(['prefix' => 'city'], function () {
+        Route::get('/', [CityController::class, 'index'])->name('city');
+    });
+
+    Route::group(['prefix' => 'subdistrict'], function () {
+        Route::get('/', [SubdistrictController::class, 'index'])->name('subdistrict');
+    });
+})
+    ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile',      [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile',    [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile',   [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
