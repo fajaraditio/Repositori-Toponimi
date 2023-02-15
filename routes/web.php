@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\CityController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProvinceController;
-use App\Http\Controllers\SubdistrictController;
+use App\Http\Livewire\Toponym\Create as ToponymCreate;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +23,10 @@ Route::group(['prefix' => '/dashboard'], function () {
         return view('dashboard');
     })
         ->name('dashboard');
+
+    Route::group(['prefix' => 'toponym'], function () {
+        Route::get('/', ToponymCreate::class)->name('toponym.create');
+    });
 })
     ->middleware(['auth', 'verified']);
 

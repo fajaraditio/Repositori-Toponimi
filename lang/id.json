@@ -1098,5 +1098,19 @@
     "Zimbabwe": "Zimbabwe",
     "ZIP / Postal Code": "ZIP / Kode Pos",
     "Zip / Postal Code": "Zip / Kode Pos",
-    "Åland Islands": "Pulau Aland"
+    "Åland Islands": "Pulau Aland",
+    "Create New": "Buat Baru",
+    "Gazetter Name": "Nama Gazetter",
+    "Previous Name": "Nama Sebelumnya",
+    "Alias": "Nama Lain",
+    "Primary Coordinate": "Koordinat Utama",
+    "Secondary Coordinate": "Koordinat Tambahan",
+    "Sub District": "Kecamatan",
+    "City / Regency": "Kota / Kabupaten",
+    "Province": "Provinsi",
+    "Submitted at": "Tanggal Submit",
+    "Create New Toponym": "Buat Toponimi Baru",
+    "Example: :exampleText": "Mis. :exampleText",
+    "Latitude": "Garis Lintang",
+    "Longitude": "Garis Bujur"
 }

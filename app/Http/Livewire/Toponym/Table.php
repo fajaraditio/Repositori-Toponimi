@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Tables;
+namespace App\Http\Livewire\Toponym;
 
 use App\Models\Toponym;
 use Illuminate\Support\Carbon;
@@ -11,7 +11,7 @@ use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
-final class ToponymTable extends PowerGridComponent
+final class Table extends PowerGridComponent
 {
     use ActionButton;
 
@@ -24,7 +24,7 @@ final class ToponymTable extends PowerGridComponent
     */
     public function setUp(): array
     {
-        $this->showCheckBox();
+        // $this->showCheckBox();
 
         return [
             Exportable::make('export')
@@ -34,6 +34,17 @@ final class ToponymTable extends PowerGridComponent
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
+        ];
+    }
+
+    public function header(): array
+    {
+        return [
+            Button::add('create')
+                ->caption(__('Create New'))
+                ->class('block w-full bg-red-500 text-white border border-slate-200 rounded py-2 px-3 leading-tight hover:bg-red-600 focus:outline-none focus:bg-white focus:border-red-500 focus:text-red-500 dark:border-slate-500 dark:bg-slate-600 2xl:dark:placeholder-slate-300 dark:text-slate-200 dark:text-slate-300 sm:text-sm')
+                ->route('toponym.create', [])
+                ->target('_self'),
         ];
     }
 
@@ -120,28 +131,34 @@ final class ToponymTable extends PowerGridComponent
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Map Number', 'map_number')
+            Column::make(__('Map Number'), 'map_number')
                 ->hidden(),
 
-            Column::make('Gazetter Name', 'name')
+            Column::make(__('Gazetter Name'), 'name')
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Alias', 'alias')
+            Column::make(__('Alias'), 'alias')
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Primary Coordinate', 'primary_coordinate'),
+            Column::make(__('Primary Coordinate'), 'primary_coordinate'),
 
-            Column::make('Secondary Coordinate', 'secondary_coordinate'),
+            Column::make(__('Secondary Coordinate'), 'secondary_coordinate'),
 
-            Column::make('Sub District', 'subdistrict'),
+            Column::make(__('Sub District'), 'subdistrict')
+                ->searchable()
+                ->sortable(),
 
-            Column::make('City / Regency', 'city'),
+            Column::make(__('City / Regency'), 'city')
+                ->searchable()
+                ->sortable(),
 
-            Column::make('Province', 'province'),
+            Column::make(__('Province'), 'province')
+                ->searchable()
+                ->sortable(),
 
-            Column::make('Submitted at', 'created_at')
+            Column::make(__('Submitted at'), 'created_at')
                 ->sortable(),
         ];
     }
