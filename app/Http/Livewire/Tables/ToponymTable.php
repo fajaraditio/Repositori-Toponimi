@@ -53,9 +53,6 @@ final class ToponymTable extends PowerGridComponent
     public function datasource(): Builder
     {
         return Toponym::query()
-            ->join('subdistricts', 'toponyms.subdistrict_id', '=', 'subdistricts.id')
-            ->join('cities', 'subdistricts.city_id', '=', 'cities.id')
-            ->join('provinces', 'cities.province_id', '=', 'provinces.id')
             ->select([
                 'toponyms.*',
                 DB::raw('CONCAT(primary_latitude, ", ", primary_longitude) primary_coordinate'),
@@ -137,6 +134,12 @@ final class ToponymTable extends PowerGridComponent
             Column::make('Primary Coordinate', 'primary_coordinate'),
 
             Column::make('Secondary Coordinate', 'secondary_coordinate'),
+
+            Column::make('Sub District', 'subdistrict'),
+
+            Column::make('City / Regency', 'city'),
+
+            Column::make('Province', 'province'),
 
             Column::make('Submitted at', 'created_at')
                 ->sortable(),
