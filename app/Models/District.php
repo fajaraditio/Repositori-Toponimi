@@ -14,4 +14,9 @@ class District extends Model
     public $timestamps = false;
 
     use HasFactory;
+
+    public function regency()
+    {
+        return $this->belongsTo(Regency::class, 'regency_id');
+    }
 }

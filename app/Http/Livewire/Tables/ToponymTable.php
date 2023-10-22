@@ -181,6 +181,11 @@ final class ToponymTable extends PowerGridComponent
     public function actions(): array
     {
         return [
+            Button::make('detail', 'Detail Toponimi')
+                ->class('bg-indigo-200 hover:bg-indigo-500 hover:text-white cursor-pointer text-dark px-3 py-2.5 m-1 rounded text-sm transition')
+                ->route('toponym.view', ['toponym' => 'id'])
+                ->target('_self'),
+
             Button::make('view', 'Lihat')
                 ->class('bg-gray-200 hover:bg-gray-500 hover:text-white cursor-pointer text-dark px-3 py-2.5 m-1 rounded text-sm transition')
                 ->route('dashboard.toponym.view', ['toponym' => 'id'])
@@ -210,16 +215,26 @@ final class ToponymTable extends PowerGridComponent
      * @return array<int, RuleActions>
      */
 
-    /*
+
     public function actionRules(): array
     {
-       return [
+        return [
 
-           //Hide button edit for ID 1
+            Rule::button('detail')
+                ->when(fn () => !empty(auth()->user()))
+                ->hide(),
+
+            Rule::button('view')
+                ->when(fn () => empty(auth()->user()))
+                ->hide(),
+
             Rule::button('edit')
-                ->when(fn($toponym) => $toponym->id === 1)
+                ->when(fn () => empty(auth()->user()))
+                ->hide(),
+
+            Rule::button('destroy')
+                ->when(fn () => empty(auth()->user()))
                 ->hide(),
         ];
     }
-    */
 }

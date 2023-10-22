@@ -14,4 +14,9 @@ class Village extends Model
     public $timestamps = false;
 
     use HasFactory;
+
+    public function district()
+    {
+        return $this->belongsTo(District::class, 'district_id');
+    }
 }

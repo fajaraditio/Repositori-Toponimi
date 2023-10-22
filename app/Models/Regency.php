@@ -14,4 +14,9 @@ class Regency extends Model
     public $timestamps = false;
 
     use HasFactory;
+
+    public function province()
+    {
+        return $this->belongsTo(Province::class, 'province_id');
+    }
 }

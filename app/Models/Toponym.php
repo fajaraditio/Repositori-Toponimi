@@ -9,6 +9,11 @@ class Toponym extends Model
 {
     use HasFactory;
 
+    public function village()
+    {
+        return $this->belongsTo(Village::class, 'village_id');
+    }
+
     public function set_langs()
     {
         return $this->belongsToMany(SetLang::class, 'toponyms_langs');
