@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\Dashboard\Pages\Area;
+use App\Http\Livewire\Dashboard\Pages\CreateToponym;
+use App\Http\Livewire\Dashboard\Pages\EditToponym;
 use App\Http\Livewire\Dashboard\Pages\Toponym;
+use App\Http\Livewire\Dashboard\Pages\ViewToponym;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,14 +30,18 @@ Route::group(['prefix' => '/dashboard', 'middleware' => ['auth', 'verified']], f
     })
         ->name('dashboard');
 
-    Route::get('/area', Area::class)->name('dashboard.area');
-    Route::get('/toponym', Toponym::class)->name('dashboard.toponym');
+    Route::get('/area',     Area::class)->name('dashboard.area');
+    Route::get('/toponym',  Toponym::class)->name('dashboard.toponym');
+
+    Route::get('/toponym/create',           CreateToponym::class)->name('dashboard.toponym.create');
+    Route::get('/toponym/edit/{toponym}',   EditToponym::class)->name('dashboard.toponym.edit');
+    Route::get('/toponym/view/{toponym}',   ViewToponym::class)->name('dashboard.toponym.view');
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile',      [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile',    [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile',   [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__ . '/auth.php';

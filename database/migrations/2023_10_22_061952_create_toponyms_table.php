@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->string('name')->nullable();
             $table->string('word_form')->nullable();
-            $table->string('meaning')->nullable();
-            $table->string('history')->nullable();
+            $table->text('meaning')->nullable();
+            $table->text('history')->nullable();
             $table->timestamps();
         });
     }

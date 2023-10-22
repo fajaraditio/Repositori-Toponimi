@@ -2,21 +2,19 @@
 
 namespace App\Http\Livewire\Tables;
 
-use App\Models\District;
-use App\Models\Village;
+use App\Models\Toponym;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use PowerComponents\LivewirePowerGrid\Rules\{Rule, RuleActions};
 use PowerComponents\LivewirePowerGrid\Traits\ActionButton;
 use PowerComponents\LivewirePowerGrid\{Button, Column, Exportable, Footer, Header, PowerGrid, PowerGridComponent, PowerGridEloquent};
 
-final class AreaVillageTable extends PowerGridComponent
+final class ToponymTable extends PowerGridComponent
 {
     use ActionButton;
-
-    public District $district;
 
     /*
     |--------------------------------------------------------------------------
@@ -51,17 +49,18 @@ final class AreaVillageTable extends PowerGridComponent
     /**
      * PowerGrid datasource.
      *
-     * @return Builder<\App\Models\Village>
+     * @return Builder<\App\Models\Toponym>
      */
     public function datasource(): Builder
     {
-        return Village::query()
+        return Toponym::query()
+            ->join('area_villages', 'toponyms.village_id', '=', 'area_villages.id')
             ->join('area_districts', 'area_villages.district_id', '=', 'area_districts.id')
             ->join('area_regencies', 'area_districts.regency_id', '=', 'area_regencies.id')
             ->join('area_provinces', 'area_regencies.province_id', '=', 'area_provinces.id')
-            ->where('district_id', $this->district->id)
             ->select(
-                'area_villages.*',
+                'toponyms.*',
+                DB::raw('area_villages.name AS village_name'),
                 DB::raw('area_districts.name AS district_name'),
                 DB::raw('area_regencies.name AS regency_name'),
                 DB::raw('area_provinces.name AS province_name')
@@ -102,9 +101,10 @@ final class AreaVillageTable extends PowerGridComponent
         return PowerGrid::eloquent()
             ->addColumn('id')
             ->addColumn('name')
-            ->addColumn('name_lower', fn (Village $model) => strtolower(e($model->name)))
+            ->addColumn('meaning', fn (Toponym $model) => $model->meaning ? '<span class="text-green-700">V</span>' : '<span class="text-red-700">X</span>')
+            ->addColumn('history', fn (Toponym $model) => $model->history ? '<span class="text-green-700">V</span>' : '<span class="text-red-700">X</span>')
             ->addColumn('created_at')
-            ->addColumn('created_at_formatted', fn (Village $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
+            ->addColumn('created_at_formatted', fn (Toponym $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
 
     /*
@@ -124,15 +124,29 @@ final class AreaVillageTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Kode Wilayah', 'code')
+            Column::make('ID', 'id')
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Provinsi', 'province_name')
+            Column::make('Nama Tempat', 'name')
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Kab. / Kota', 'regency_name')
+            Column::make('Bentuk Kata', 'word_form')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('Makna Kata', 'meaning')
+                ->bodyAttribute('text-center font-bold')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('Sejarah Kata', 'history')
+                ->bodyAttribute('text-center font-bold')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('Kelurahan / Desa', 'village_name')
                 ->searchable()
                 ->sortable(),
 
@@ -140,7 +154,11 @@ final class AreaVillageTable extends PowerGridComponent
                 ->searchable()
                 ->sortable(),
 
-            Column::make('Kelurahan / Desa', 'name')
+            Column::make('Kab. / Kota', 'regency_name')
+                ->searchable()
+                ->sortable(),
+
+            Column::make('Provinsi', 'province_name')
                 ->searchable()
                 ->sortable(),
         ];
@@ -155,7 +173,7 @@ final class AreaVillageTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Village Action Buttons.
+     * PowerGrid Toponym Action Buttons.
      *
      * @return array<int, Button>
      */
@@ -165,7 +183,7 @@ final class AreaVillageTable extends PowerGridComponent
         return [
             Button::make('view', 'Lihat')
                 ->class('bg-gray-200 hover:bg-gray-500 hover:text-white cursor-pointer text-dark px-3 py-2.5 m-1 rounded text-sm transition')
-                ->route('dashboard.area', ['districtId' => 'id'])
+                ->route('dashboard.toponym.view', ['toponym' => 'id'])
                 ->target('_self'),
 
             Button::make('edit', 'Edit')
@@ -187,7 +205,7 @@ final class AreaVillageTable extends PowerGridComponent
     */
 
     /**
-     * PowerGrid Village Action Rules.
+     * PowerGrid Toponym Action Rules.
      *
      * @return array<int, RuleActions>
      */
@@ -199,7 +217,7 @@ final class AreaVillageTable extends PowerGridComponent
 
            //Hide button edit for ID 1
             Rule::button('edit')
-                ->when(fn($village) => $village->id === 1)
+                ->when(fn($toponym) => $toponym->id === 1)
                 ->hide(),
         ];
     }

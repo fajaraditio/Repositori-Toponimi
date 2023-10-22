@@ -1,8 +1,29 @@
 <header class="bg-white dark:bg-gray-800 shadow">
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        @if (!empty($provinceId))
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Wilayah') }}
+            {{ __('Wilayah Kab. / Kota') }}
         </h2>
+        <p>Berikut daftar wilayah setingkat kabupaten / kota</p>
+        
+        @elseif (!empty($regencyId))
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Wilayah Kecamatan') }}
+        </h2>
+        <p>Berikut daftar wilayah setingkat kecamatan</p>
+
+        @elseif (!empty($district))
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Wilayah Kelurahan / Desa') }}
+        </h2>
+        <p>Berikut daftar wilayah setingkat kelurahan / desa</p>
+
+        @else
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('Wilayah Provinsi') }}
+        </h2>
+        <p>Berikut daftar wilayah setingkat provinsi</p>
+        @endif
     </div>
 </header>
 
