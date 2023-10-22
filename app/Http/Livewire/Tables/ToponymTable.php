@@ -64,7 +64,8 @@ final class ToponymTable extends PowerGridComponent
                 DB::raw('area_districts.name AS district_name'),
                 DB::raw('area_regencies.name AS regency_name'),
                 DB::raw('area_provinces.name AS province_name')
-            );
+            )
+            ->orderBy('name');
     }
 
     /*
@@ -124,10 +125,6 @@ final class ToponymTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('ID', 'id')
-                ->searchable()
-                ->sortable(),
-
             Column::make('Nama Tempat', 'name')
                 ->searchable()
                 ->sortable(),
