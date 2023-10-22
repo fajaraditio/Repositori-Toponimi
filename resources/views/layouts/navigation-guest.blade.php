@@ -52,7 +52,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('login')">
-                            {{ __('Login') }}
+                            {{ __('Masuk') }}
                         </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
@@ -97,7 +97,7 @@
 
             <div class="mt-3 space-y-1">
                 <x-responsive-nav-link :href="route('login')">
-                    {{ __('Login') }}
+                    {{ __('Masuk') }}
                 </x-responsive-nav-link>
             </div>
         </div>
