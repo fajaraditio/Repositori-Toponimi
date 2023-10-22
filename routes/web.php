@@ -6,6 +6,7 @@ use App\Http\Livewire\Dashboard\Pages\CreateToponym;
 use App\Http\Livewire\Dashboard\Pages\EditToponym;
 use App\Http\Livewire\Dashboard\Pages\Toponym;
 use App\Http\Livewire\Dashboard\Pages\ViewToponym;
+use App\Http\Livewire\Guest\Pages\About;
 use App\Http\Livewire\Guest\Pages\Contact;
 use App\Http\Livewire\Guest\Pages\District;
 use App\Http\Livewire\Guest\Pages\Province;
@@ -35,6 +36,7 @@ Route::get('/area/district/{regency}',      District::class)->name('area.distric
 Route::get('/area/village/{district}',      Village::class)->name('area.village');
 Route::get('/toponym',                      GuestToponym::class)->name('toponym');
 Route::get('/toponym/{toponym}',            GuestViewToponym::class)->name('toponym.view');
+Route::get('/about',                        About::class)->name('about');
 Route::get('/contact',                      Contact::class)->name('contact');
 
 Route::group(['prefix' => '/dashboard', 'middleware' => ['auth', 'verified']], function () {

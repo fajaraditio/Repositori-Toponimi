@@ -22,7 +22,7 @@
                     <x-nav-link :href="route('area.province')" :active="request()->routeIs('area.province') || request()->routeIs('area.regency') || request()->routeIs('area.district') || request()->routeIs('area.village')">
                         {{ __('Daftar Wilayah') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                    <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
                         {{ __('Tentang Repositori Toponimi') }}
                     </x-nav-link>
                     <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
@@ -83,7 +83,7 @@
             <x-responsive-nav-link :href="route('area.province')" :active="request()->routeIs('area.province') || request()->routeIs('area.regency') || request()->routeIs('area.district') || request()->routeIs('area.village')">
                 {{ __('Daftar Wilayah') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+            <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                 {{ __('Tentang Repositori Toponimi') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
