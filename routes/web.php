@@ -6,6 +6,12 @@ use App\Http\Livewire\Dashboard\Pages\CreateToponym;
 use App\Http\Livewire\Dashboard\Pages\EditToponym;
 use App\Http\Livewire\Dashboard\Pages\Toponym;
 use App\Http\Livewire\Dashboard\Pages\ViewToponym;
+use App\Http\Livewire\Guest\Pages\Contact;
+use App\Http\Livewire\Guest\Pages\District;
+use App\Http\Livewire\Guest\Pages\Province;
+use App\Http\Livewire\Guest\Pages\Regency;
+use App\Http\Livewire\Guest\Pages\Village;
+use App\Http\Livewire\Guest\Pages\Welcome;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,9 +26,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',                             Welcome::class)->name('welcome');
+Route::get('/area/province',                Province::class)->name('area.province');
+Route::get('/area/regency/{provinceId}',    Regency::class)->name('area.regency');
+Route::get('/area/district/{regencyId}',    District::class)->name('area.district');
+Route::get('/area/village/{districtId}',    Village::class)->name('area.village');
+Route::get('/toponym',                      Toponym::class)->name('toponym');
+Route::get('/contact',                      Contact::class)->name('contact');
 
 Route::group(['prefix' => '/dashboard', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', function () {
