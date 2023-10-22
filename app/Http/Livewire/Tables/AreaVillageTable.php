@@ -163,6 +163,11 @@ final class AreaVillageTable extends PowerGridComponent
     public function actions(): array
     {
         return [
+            Button::make('detail', 'Lihat Toponimi')
+                ->class('bg-gray-200 hover:bg-gray-500 hover:text-white cursor-pointer text-dark px-3 py-2.5 m-1 rounded text-sm transition')
+                ->route('area.village', ['district' => 'id'])
+                ->target('_self'),
+
             Button::make('view', 'Lihat')
                 ->class('bg-gray-200 hover:bg-gray-500 hover:text-white cursor-pointer text-dark px-3 py-2.5 m-1 rounded text-sm transition')
                 ->route('dashboard.area', ['districtId' => 'id'])
@@ -192,16 +197,24 @@ final class AreaVillageTable extends PowerGridComponent
      * @return array<int, RuleActions>
      */
 
-    /*
     public function actionRules(): array
     {
-       return [
+        return [
+            Rule::button('detail')
+                ->when(fn () => !empty(auth()->user()))
+                ->hide(),
 
-           //Hide button edit for ID 1
+            Rule::button('view')
+                ->when(fn () => empty(auth()->user()))
+                ->hide(),
+
             Rule::button('edit')
-                ->when(fn($village) => $village->id === 1)
+                ->when(fn () => empty(auth()->user()))
+                ->hide(),
+
+            Rule::button('destroy')
+                ->when(fn () => empty(auth()->user()))
                 ->hide(),
         ];
     }
-    */
 }

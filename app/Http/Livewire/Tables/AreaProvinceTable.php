@@ -137,6 +137,11 @@ final class AreaProvinceTable extends PowerGridComponent
     public function actions(): array
     {
         return [
+            Button::make('detail', 'Lihat Kab. / Kota')
+                ->class('bg-gray-200 hover:bg-gray-500 hover:text-white cursor-pointer text-dark px-3 py-2.5 m-1 rounded text-sm transition')
+                ->route('area.regency', ['province' => 'id'])
+                ->target('_self'),
+
             Button::make('view', 'Lihat')
                 ->class('bg-gray-200 hover:bg-gray-500 hover:text-white cursor-pointer text-dark px-3 py-2.5 m-1 rounded text-sm transition')
                 ->route('dashboard.area', ['provinceId' => 'id'])
@@ -166,16 +171,24 @@ final class AreaProvinceTable extends PowerGridComponent
      * @return array<int, RuleActions>
      */
 
-    /*
     public function actionRules(): array
     {
-       return [
+        return [
+            Rule::button('detail')
+                ->when(fn () => !empty(auth()->user()))
+                ->hide(),
 
-           //Hide button edit for ID 1
+            Rule::button('view')
+                ->when(fn () => empty(auth()->user()))
+                ->hide(),
+
             Rule::button('edit')
-                ->when(fn($province) => $province->id === 1)
+                ->when(fn () => empty(auth()->user()))
+                ->hide(),
+
+            Rule::button('destroy')
+                ->when(fn () => empty(auth()->user()))
                 ->hide(),
         ];
     }
-    */
 }

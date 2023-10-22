@@ -219,7 +219,6 @@ final class ToponymTable extends PowerGridComponent
     public function actionRules(): array
     {
         return [
-
             Rule::button('detail')
                 ->when(fn () => !empty(auth()->user()))
                 ->hide(),

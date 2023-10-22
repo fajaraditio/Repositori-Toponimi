@@ -19,7 +19,7 @@
                     <x-nav-link :href="route('toponym')" :active="request()->routeIs('toponym')">
                         {{ __('Cari Toponimi') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('area.province')" :active="request()->routeIs('area.province')">
+                    <x-nav-link :href="route('area.province')" :active="request()->routeIs('area.province') || request()->routeIs('area.regency') || request()->routeIs('area.district') || request()->routeIs('area.village')">
                         {{ __('Daftar Wilayah') }}
                     </x-nav-link>
                     <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
@@ -80,7 +80,7 @@
             <x-responsive-nav-link :href="route('toponym')" :active="request()->routeIs('toponym')">
                 {{ __('Cari Toponimi') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('area.province')" :active="request()->routeIs('area.province')">
+            <x-responsive-nav-link :href="route('area.province')" :active="request()->routeIs('area.province') || request()->routeIs('area.regency') || request()->routeIs('area.district') || request()->routeIs('area.village')">
                 {{ __('Daftar Wilayah') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
