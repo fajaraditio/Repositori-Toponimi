@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\Dashboard\Pages\Area;
+use App\Http\Livewire\Dashboard\Pages\Toponym;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,9 +21,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::group(['prefix' => '/dashboard', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/', function () {
+        return view('dashboard');
+    })
+        ->name('dashboard');
+
+    Route::get('/area', Area::class)->name('dashboard.area');
+    Route::get('/toponym', Toponym::class)->name('dashboard.toponym');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,4 +37,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
