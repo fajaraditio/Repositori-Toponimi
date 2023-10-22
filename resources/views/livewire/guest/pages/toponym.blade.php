@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Cari Toponimi') }}
         </h2>
-        <p>Silakan mencari toponimi dengan mengetikkannya pada pencarian tabel di bawah ini</p>
+        <p class="text-sm">Silakan mencari toponimi dengan mengetikkannya pada pencarian tabel di bawah ini</p>
     </div>
 </header>
 

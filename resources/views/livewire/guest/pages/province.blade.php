@@ -3,7 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Wilayah Provinsi') }}
         </h2>
-        <p>Berikut daftar wilayah setingkat provinsi</p>
+        <p class="text-sm">Berikut daftar wilayah setingkat provinsi</p>
     </div>
 </header>
 
